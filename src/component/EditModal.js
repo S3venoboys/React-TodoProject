@@ -8,7 +8,7 @@ const EditModal = ({edit, close, data, change, update}) => {
         {edit === true ? 
             <div className='modal-container'>
                 <div className='modal-box'>
-                    <h3>Edit</h3>
+                    <h3>{data.id}</h3>
                     <div className='input'>
                         <input type="text" value={data.title} onChange={change} />
                     </div>

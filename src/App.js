@@ -4,6 +4,7 @@ import TodoItem from './component/TodoItem';
 import FormInput from './component/FormInput';
 import './App.css';
 import EditModal from './component/EditModal';
+import DeleteModal from './component/DeleteModal';
 
 
 
@@ -24,8 +25,10 @@ function App() {
     id: "",
     title: ""
   })
+  const [deleteData, setdeleteData] = useState({id: ""})
 
   const [isEdit, setisEdit] = useState(false)
+  const [isDelete, setisDelete] = useState(false)
 
   const update = () => {
     const {id, title} = editData
@@ -39,8 +42,13 @@ function App() {
       title:""
     })
   }
+  const deleteTask = () => {
+    const {id} = deleteData
+    setTodo(todo.filter(item => item.id !== id))
+    setisDelete(false)
+  }
 
-  const openModal = (id, data) => {
+  const openModalEdit = (id, data) => {
    setisEdit(true)
    seteditData({
         id,
@@ -48,13 +56,14 @@ function App() {
       }
     )
   }
+  const openModalDelete = (id) => {
+    setisDelete(true)
+    setdeleteData({id})
+   }
 
   const closeModal = () => {
     setisEdit(false)
-  }
-
-  const deleteTask = id => {
-    setTodo(todo.filter(item => item.id !== id))
+    setisDelete(false)
   }
 
   const addTask = data => {
@@ -85,8 +94,8 @@ function App() {
             <TodoItem 
               key={e.id}
               todo={e}
-              open={openModal}
-              del={deleteTask}
+              openEdit={openModalEdit}
+              openDelete={openModalDelete}
             />  
           )}
       </div>
@@ -103,6 +112,12 @@ function App() {
         change={setTitle}
         data={editData}
         update={update}
+      />
+
+      <DeleteModal
+        delate = {isDelete}
+        close={closeModal}
+        deleteTask={deleteTask}
       />
       
     </div>

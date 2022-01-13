@@ -2,16 +2,13 @@ import React from 'react'
 import Button from './Button'
 
 
-const TodoItem = ({todo, open, del}) => {
-    const delById = id => {
-        del(id)
-    }
+const TodoItem = ({todo, openEdit, openDelete}) => {
     return (
         <div style={todoItem}>
             <p>{todo.title}</p>
             <div>
-                <Button text="edit" variant="success" action={() => open(todo.id, todo.title)} />
-                <Button text="delete" variant="warning" action={() => delById(todo.id)} />
+                <Button text="edit" variant="success" action={() => openEdit(todo.id, todo.title)} />
+                <Button text="delete" variant="warning" action={() => openDelete(todo.id)} />
             </div>
         </div>
     )
