@@ -1,10 +1,10 @@
 import React from 'react'
 import "../styles/Button.css"
 
-const Button = ({variant, text, action}) => {
+const Button = ({variant, load, text, action}) => {
     return (
         <button className={`btn btn-${variant}`} onClick={action}>
-            {text}
+            {load ? "loading..." : text}
         </button>
     )
 }
